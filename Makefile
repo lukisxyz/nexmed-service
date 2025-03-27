@@ -1,10 +1,35 @@
 # Variables
 APP_NAME=nexmedis
 DB_URL ?= postgres://fahmi:wap12345@localhost:5432/nexmedis?sslmode=disable
+BUILD_DIR=build
 
+# Go related variables
+GOBASE=$(shell pwd)
+GOBIN=$(GOBASE)/$(BUILD_DIR)
+
+# Air configuration
+AIR_CONFIG=.air.toml
+
+# Development server
+dev:
+	@if ! which air > /dev/null; then \
+		echo "Installing air..."; \
+		go install github.com/cosmtrek/air@latest; \
+	fi
+	air -c $(AIR_CONFIG)
+
+# Build the application
+build:
+	@echo "Building..."
+	@go build -o $(GOBIN)/$(APP_NAME) ./cmd/main.go
+
+# Clean build directory
+clean:
+	@echo "Cleaning..."
+	@rm -rf $(BUILD_DIR)
 # Go commands
 run:
-	go run main.go
+	go run cmd/main.go
 
 build:
 	go build -o bin/$(APP_NAME) main.go
@@ -15,21 +40,21 @@ test:
 # Database migrations
 migrate-up:
 	@if [ "$(db)" ]; then \
-		migrate -database "$(db)" -path migrations up; \
+		migrate -database "$(db)" -path db/migrations up; \
 	else \
-		migrate -database "$(DB_URL)" -path migrations up; \
+		migrate -database "$(DB_URL)" -path db/migrations up; \
 	fi
 
 migrate-down:
 	@if [ "$(db)" ]; then \
-		migrate -database "$(db)" -path migrations down; \
+		migrate -database "$(db)" -path db/migrations down; \
 	else \
-		migrate -database "$(DB_URL)" -path migrations down; \
+		migrate -database "$(DB_URL)" -path db/migrations down; \
 	fi
 
 migrate-create:
 	@read -p "Enter migration name: " name; \
-	migrate create -ext sql -dir migrations -seq $$name
+	migrate create -ext sql -dir db/migrations -seq $$name
 
 # Install tools
 install-tools:
@@ -41,12 +66,12 @@ swagger-install:
 
 # Generate swagger documentation
 swagger-gen:
-	swag init -g main.go -o docs
+	swag init -g cmd/main.go -o docs
 
 # Generate swagger with specific configuration
 swagger-gen-config:
 	swag init \
-		-g main.go \
+		-g cmd/main.go \
 		-o docs \
 		--parseDependency \
 		--parseInternal \
@@ -55,7 +80,7 @@ swagger-gen-config:
 
 # Serve swagger UI locally
 swagger-serve:
-	go run main.go -docs
+	go run cmd/main.go -docs
 
 # Combined swagger command
 swagger: swagger-install swagger-gen
