@@ -4,9 +4,9 @@ import (
 	"context"
 	"flag"
 	"net/http"
-	"nexmedis-services/account"
-	"nexmedis-services/auth"
-	custom_middleware "nexmedis-services/middleware"
+	"nextmed-service/account"
+	"nextmed-service/auth"
+	custom_middleware "nextmed-service/middleware"
 
 	_ "github.com/lukisxyz/nexmed-service/docs"
 
