@@ -5,16 +5,16 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
+	mw "github.com/lukisxyz/nexmed-service/internal/middleware"
 )
 
 func Router() *chi.Mux {
 	r := chi.NewMux()
-	// protected
-	r.Group(func(r chi.Router) {
-		// TODO: apply middleware here
-		r.Post("/profile", createProfile)
-		r.Put("/profile", updateProfile)
-	})
+
+	r.Use(mw.AuthenticationMiddleware)
+	r.Get("/", getProfileHandler)
+	r.Post("/", createProfileHandler)
+	r.Put("/", updateProfileHandler)
 
 	return r
 }

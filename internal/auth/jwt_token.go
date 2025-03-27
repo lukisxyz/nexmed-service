@@ -2,7 +2,6 @@ package auth
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	jwt "github.com/lukisxyz/nexmed-service/internal/utils/token"
@@ -18,7 +17,6 @@ func tokenIsValid(ctx context.Context, userID, tokenFromRequest string) bool {
     if err != nil {
         return false
     }
-    fmt.Println(res)
     return tokenFromRequest == res
 }
 

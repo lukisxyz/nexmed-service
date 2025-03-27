@@ -111,6 +111,146 @@ paths:
       summary: Logout account
       tags:
       - auth
+  /profile:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve the profile details of the authenticated user
+      parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Profile retrieved successfully
+          schema:
+            additionalProperties:
+              items:
+                type: string
+              type: array
+            type: object
+        "400":
+          description: Invalid request
+        "404":
+          description: Profile not found
+      security:
+      - BearerAuth: []
+      summary: Get user profile
+      tags:
+      - profile
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: Create a profile for the authenticated user
+      parameters:
+      - description: Full Name
+        in: formData
+        name: full_name
+        required: true
+        type: string
+      - description: Short biography
+        in: formData
+        name: bio
+        type: string
+      - description: Phone Number
+        in: formData
+        name: phone_number
+        required: true
+        type: string
+      - description: Address
+        in: formData
+        name: address
+        required: true
+        type: string
+      - description: Birth Date
+        format: date-time
+        in: formData
+        name: birth_date
+        required: true
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Profile created successfully
+          schema:
+            additionalProperties:
+              items:
+                type: string
+              type: array
+            type: object
+        "400":
+          description: Invalid input data
+        "422":
+          description: Unable to process the request
+      security:
+      - BearerAuth: []
+      summary: Create a new user profile
+      tags:
+      - profile
+    put:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: Update the authenticated user's profile information
+      parameters:
+      - description: Full Name
+        in: formData
+        name: full_name
+        type: string
+      - description: Short biography
+        in: formData
+        name: bio
+        type: string
+      - description: Phone Number
+        in: formData
+        name: phone_number
+        type: string
+      - description: Address
+        in: formData
+        name: address
+        type: string
+      - description: Birth Date
+        format: date-time
+        in: formData
+        name: birth_date
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Profile updated successfully
+          schema:
+            additionalProperties:
+              items:
+                type: string
+              type: array
+            type: object
+        "400":
+          description: Invalid input data
+        "422":
+          description: Unable to process the request
+      security:
+      - BearerAuth: []
+      summary: Update user profile
+      tags:
+      - profile
   /register:
     post:
       consumes:

@@ -11,7 +11,6 @@ import (
 var (
 	ErrEmailAlreadyUsed = errors.New("account: email already used")
 	ErrAccountNotFound = errors.New("account: not found")
-	ErrInternalServer = errors.New("account: unknown error, contact customer service")
 	ErrWrongPassword = errors.New("account: password not match")
 	ErrResetPasswirdCannotSame = errors.New("account: new password cannot same")
 	ErrEmailNotValid = errors.New("account: email not valid")

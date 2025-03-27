@@ -10,13 +10,12 @@ import (
 type Profile struct {
 	Id          ulid.ULID  `json:"id"`
 	AccountId   ulid.ULID  `json:"account_id"`
-	FirstName   string     `json:"first_name"`
-	LastName    string     `json:"last_name"`
-	PhoneNumber string     `json:"phone_number"`
-	Address     string     `json:"address"`
-	City        string     `json:"city"`
-	Province    string     `json:"province"`
-	PostalCode  string     `json:"postal_code"`
+	FullName   null.String     `json:"full_name"`
+	PhoneNumber null.String     `json:"phone_number"`
+	Address     null.String     `json:"address"`
+	Bio        null.String     `json:"bio"`
+	Avatar        null.String     `json:"avatar"`
+	BirthDate null.Time	`json:"birth_date"`
 	CreatedAt   time.Time  `json:"created_at"`
 	UpdatedAt   null.Time  `json:"updated_at"`
 }

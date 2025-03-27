@@ -40,21 +40,21 @@ test:
 # Database migrations
 migrate-up:
 	@if [ "$(db)" ]; then \
-		migrate -database "$(db)" -path db/migrations up; \
+		migrate -database "$(db)" -path lib/db/migrations up; \
 	else \
-		migrate -database "$(DB_URL)" -path db/migrations up; \
+		migrate -database "$(DB_URL)" -path lib/db/migrations up; \
 	fi
 
 migrate-down:
 	@if [ "$(db)" ]; then \
-		migrate -database "$(db)" -path db/migrations down; \
+		migrate -database "$(db)" -path lib/db/migrations down; \
 	else \
-		migrate -database "$(DB_URL)" -path db/migrations down; \
+		migrate -database "$(DB_URL)" -path lib/db/migrations down; \
 	fi
 
 migrate-create:
 	@read -p "Enter migration name: " name; \
-	migrate create -ext sql -dir db/migrations -seq $$name
+	migrate create -ext sql -dir lib/db/migrations -seq $$name
 
 # Install tools
 install-tools:

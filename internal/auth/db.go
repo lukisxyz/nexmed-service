@@ -1,6 +1,8 @@
 package auth
 
 import (
+	"errors"
+
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/redis/go-redis/v9"
 	"github.com/rs/zerolog/log"
@@ -10,6 +12,7 @@ import (
 var (
 	pool *pgxpool.Pool
 	rdb *redis.Client
+	ErrInternalServer = errors.New("account: unknown error")
 )
 
 func SetConnection(_pool *pgxpool.Pool, _rdb *redis.Client) {
