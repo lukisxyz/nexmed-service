@@ -4,7 +4,10 @@ go 1.24.1
 
 require github.com/swaggo/http-swagger v1.3.4
 
-require github.com/swaggo/files/v2 v2.0.0 // indirect
+require (
+	github.com/go-chi/cors v1.2.1 // indirect
+	github.com/swaggo/files/v2 v2.0.0 // indirect
+)
 
 require (
 	github.com/KyleBanks/depth v1.2.1 // indirect

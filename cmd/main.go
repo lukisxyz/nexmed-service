@@ -22,6 +22,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/go-chi/cors"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/redis/go-redis/v9"
 	"github.com/rs/zerolog/log"
@@ -76,7 +77,14 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
-	// r.Use(mw.CORSMiddleware)
+	r.Use(cors.Handler(cors.Options{
+		AllowedOrigins:   []string{"*"}, // Allow all origins
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"},
+		AllowedHeaders:   []string{"*"}, // Allow all headers
+		ExposedHeaders:   []string{"*"}, // Expose all headers
+		AllowCredentials: false,         // Must be false when using "*"
+		MaxAge:           86400,         // Cache preflight response for 24 hours
+	}))
 	r.Use(mw.RateLimitMiddleware)
     r.Get("/swagger/*", httpSwagger.Handler(
         httpSwagger.URL("http://localhost:8080/swagger/doc.json"),
