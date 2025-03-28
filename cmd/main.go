@@ -76,7 +76,7 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
-	r.Use(mw.CORSMiddleware)
+	// r.Use(mw.CORSMiddleware)
 	r.Use(mw.RateLimitMiddleware)
     r.Get("/swagger/*", httpSwagger.Handler(
         httpSwagger.URL("http://localhost:8080/swagger/doc.json"),
