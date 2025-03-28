@@ -31,7 +31,7 @@ import (
 // @title User management
 // @version 1.0
 // @description Simple user management
-// @host http://103.175.217.181 localhost:8080
+// @host http://103.175.217.181
 // @schemes http https
 // @BasePath /api
 func main() {
@@ -87,7 +87,7 @@ func main() {
 	}))
 	r.Use(mw.RateLimitMiddleware)
     r.Get("/swagger/*", httpSwagger.Handler(
-        httpSwagger.URL("http://localhost:8080/swagger/doc.json"),
+        httpSwagger.URL("http://103.175.217.181/swagger/doc.json"),
     ))
 
 	r.Mount("/api/", auth.Router())

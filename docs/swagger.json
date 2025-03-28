@@ -10,7 +10,7 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "localhost:8080",
+    "host": "http://103.175.217.181",
     "basePath": "/api",
     "paths": {
         "/change-password": {
