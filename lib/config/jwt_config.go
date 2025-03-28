@@ -1,7 +1,7 @@
 package config
 
 type jwtConfig struct {
-	Secret string `yaml:"host" json:"host"`
+	Secret string `yaml:"secret" json:"secret"`
 }
 
 func defaultJwtConfig() jwtConfig {

@@ -30,7 +30,7 @@ import (
 // @title User management
 // @version 1.0
 // @description Simple user management
-// @host localhost:8080
+// @host http://103.175.217.181 localhost:8080
 // @schemes http https
 // @BasePath /api
 func main() {
